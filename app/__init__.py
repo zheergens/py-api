@@ -2,6 +2,8 @@ from flask import Flask, request, g, make_response
 from app.common import logger
 from app.common.logger import Logger
 from app.config.settings import LoggerConfig
+from app.config.settings import DBConfig
+from app.v1.dbs import DB
 import json
 import os
 
@@ -9,6 +11,7 @@ import os
 def create_app():
     app = Flask(__name__)
     app.config.from_object(LoggerConfig)
+    app.config.from_object(DBConfig)
 
     app.template_folder = os.path.join(app.root_path, 'html')
 
@@ -28,7 +31,7 @@ def create_app():
                        error_log=g.config.get("ERROR_LOG"),
                        slow_action=g.config.get("SLOW_ACTION"),
                        level_no=g.config.get("LEVEL_INFO"), client_identification=g.ip)
-        print(g.config.get("INFO_LOG"))
+        g.db = DB()
 
     # api路由
     from app.v1 import interface as api_blueprint

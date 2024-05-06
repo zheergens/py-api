@@ -1,7 +1,7 @@
 reload = True
 
-#bind = 'unix:/var/run/d2admin/gunicorn_tool.sock'
-bind = '127.0.0.1:9876'
+# bind = 'unix:/var/run/d2admin/gunicorn_tool.sock'
+bind = '0.0.0.0:3000'
 
 workers = 2
 
@@ -13,9 +13,9 @@ timeout = 600
 
 daemon = True
 
-pidfile = '/var/run/d2admin/gunicorn_tool.pid'
+pidfile = '/var/run/erp-api.pid'
 capture_output = True
 
 access_log_format = '%(t)s %(p)s %(h)s "%(r)s" %(s)s %(L)s %(b)s %(f)s" "%(a)s" "%(T)s"'
-accesslog = '/var/log/d2admin/access.log'
-errorlog = '/var/log/d2admin/error.log'
+accesslog = '/var/log/erp-api/gunicorn_access.log'
+errorlog = '/var/log/erp-api/gunicorn_error.log'
